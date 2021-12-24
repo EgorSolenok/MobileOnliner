@@ -12,5 +12,5 @@ WEB_CAPABILITIES = {
     "browserName": "Chrome",
 }
 
-FILE_LOG_NAME = (str(datetime.now())[2:16]).replace(':',' ')
+FILE_LOG_NAME = (str(datetime.now())[2:16]).replace(':','').replace(' ','')
 
