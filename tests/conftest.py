@@ -1,7 +1,7 @@
 import pytest
 import allure
 import os
-from utils.server_logger import create_logs_file
+from utils.server_logger import ServerLogger
 from appium import webdriver
 from config import WEB_CAPABILITIES
 from config import APPIUM_HOST, APPIUM_PORT
@@ -15,7 +15,7 @@ def android_browser():
     )
     yield android_browser
     
-    create_logs_file(android_browser)
+    ServerLogger.get_logs(android_browser)
     android_browser.quit()
     
 @pytest.hookimpl(tryfirst=True, hookwrapper=True)

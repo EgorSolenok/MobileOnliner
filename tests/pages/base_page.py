@@ -1,3 +1,5 @@
+import allure
+
 from tests.pages.locators.locators import ChromeLocators
 from utils.browser_helper import BrowserHelper
 
@@ -6,7 +8,8 @@ class BasePage:
     def __init__(self, android_browser, url):
         self.android_browser = android_browser
         self.url = url
-        
+    
+    @allure.step("Open the page")
     def open(self):
         self.android_browser.get(self.url)
         
@@ -14,6 +17,7 @@ class BasePage:
         webview = self.android_browser.contexts[1]
         self.android_browser.switch_to.context(webview)
         
+    @allure.step("Close native proposal for translation of Chrome")
     def close_translation(self):
         native = self.android_browser.contexts[0]
         self.android_browser.switch_to.context(native)
