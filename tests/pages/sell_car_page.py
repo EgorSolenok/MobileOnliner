@@ -1,35 +1,27 @@
+import allure
+
 from tests.pages.base_page import BasePage
 from tests.pages.locators.locators import SellCarPageLocators
 from utils.browser_helper import BrowserHelper
 
 
 class SellCarPage(BasePage):
-    
-    def go_to_filter(self):
-        filter_button = BrowserHelper.find_visible_element(self.android_browser, *SellCarPageLocators.FILTER_BUTTON)
-        filter_button.click()
-    
+    @allure.step("Select required country")
     def select_country(self):
-        country_form = BrowserHelper.find_visible_element(self.android_browser, *SellCarPageLocators.COUNTRY_FORM)
-        country_form.click()
-        belarus_button = BrowserHelper.find_visible_element(self.android_browser,
-                                                            *SellCarPageLocators.RADIO_BUTTON_BELARUS)
-        belarus_button.click()
-    
+        BrowserHelper.click_element(self.android_browser, *SellCarPageLocators.FILTER_BUTTON)
+        BrowserHelper.click_element(self.android_browser, *SellCarPageLocators.COUNTRY_FORM)
+        BrowserHelper.click_element(self.android_browser, *SellCarPageLocators.RADIO_BUTTON_BELARUS)
+
+
+    @allure.step("Select required car brand")
     def select_car_brand(self):
-        brand_filter = BrowserHelper.find_visible_element(self.android_browser, *SellCarPageLocators.CAR_BRAND_FILTER)
-        brand_filter.click()
-        car_text_form = BrowserHelper.find_visible_element(self.android_browser, *SellCarPageLocators.BRAND_TEXT_FORM)
-        car_text_form.send_keys('mini')
-        mini_brand_checkbox = BrowserHelper.find_visible_element(self.android_browser,
-                                                                 *SellCarPageLocators.MINI_BRAND_CHECKBOX)
-        mini_brand_checkbox.click()
+        BrowserHelper.click_element(self.android_browser, *SellCarPageLocators.CAR_BRAND_FILTER)
+        BrowserHelper.send_keys(self.android_browser, *SellCarPageLocators.BRAND_TEXT_FORM, 'mini')
+        BrowserHelper.click_element(self.android_browser, *SellCarPageLocators.MINI_BRAND_CHECKBOX)
+        BrowserHelper.click_element(self.android_browser, *SellCarPageLocators.CLOSE_CAR_FILTER_BUTTON)
     
-    def close_car_filter(self):
-        close_button = BrowserHelper.find_visible_element(self.android_browser,
-                                                          *SellCarPageLocators.CLOSE_CAR_FILTER_BUTTON)
-        close_button.click()
     
+    @allure.step("Verification of brand names in links of car cards")
     def should_be_correct_car_brand(self):
         car_names = BrowserHelper.find_visible_elements(self.android_browser, *SellCarPageLocators.CAR_LINK_NAMES)
         for car_name in car_names:

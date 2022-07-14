@@ -1,6 +1,3 @@
-from datetime import datetime
-
-
 APPIUM_PORT = '4723'
 APPIUM_HOST = 'localhost'
 
@@ -12,5 +9,4 @@ WEB_CAPABILITIES = {
     "browserName": "Chrome",
 }
 
-FILE_LOG_NAME = (str(datetime.now())[2:16]).replace(':',' ')
 
